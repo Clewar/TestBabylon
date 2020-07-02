@@ -22,7 +22,7 @@ var createScene = function () {
         ["Media/uptale360.mp4"],
         {
             resolution: 32,
-            clickToPlay: false,
+            clickToPlay: true,
             useDirectMapping: false
         },
         scene
@@ -51,6 +51,38 @@ var createScene = function () {
 	// Fin Domo
 
 	// Tv
+
+	var ANote0 = BABYLON.MeshBuilder.CreateBox("ANote0", {width: 7.646700, height: 5.726200, depth: 0.100000 }, scene);
+	ANote0.position = new BABYLON.Vector3(4,2,40)
+	var mat = new BABYLON.StandardMaterial("ANote0Mat",scene);
+	mat.diffuseColor = new BABYLON.Color4(0, 0, 0, 1);
+	ANote0.material = mat;
+	var planeOpts = {
+			height: 5.4762, 
+			width: 7.3967, 
+			sideOrientation: BABYLON.Mesh.BACKSIDE
+	};
+	var ANote0Video = BABYLON.MeshBuilder.CreatePlane("plane", planeOpts, scene);
+	var vidPos = (new BABYLON.Vector3(0,0,0.1)).addInPlace(ANote0.position);
+    ANote0Video.position = vidPos;
+	var ANote0VideoMat = new BABYLON.StandardMaterial("m", scene);
+	var ANote0VideoVidTex = new BABYLON.VideoTexture("vidtex","textures/babylonjs.mp4", scene);
+	ANote0VideoMat.diffuseTexture = ANote0VideoVidTex;
+	ANote0VideoMat.roughness = 1;
+	ANote0VideoMat.emissiveColor = new BABYLON.Color3.White();
+	ANote0Video.material = ANote0VideoMat;
+	scene.onPointerObservable.add(function(evt){
+			if(evt.pickInfo.pickedMesh === ANote0Video){
+                //console.log("picked");
+					if(ANote0VideoVidTex.video.paused)
+						ANote0VideoVidTex.video.play();
+					else
+						ANote0VideoVidTex.video.pause();
+                    console.log(ANote0VideoVidTex.video.paused?"paused":"playing");
+			}
+	}, BABYLON.PointerEventTypes.POINTERPICK);
+
+
    
     //console.log(ANote0Video);
     return scene;
