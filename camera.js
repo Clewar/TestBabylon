@@ -53,7 +53,7 @@ var createScene = function () {
 	// Tv
 
 	var ANote0 = BABYLON.MeshBuilder.CreateBox("ANote0", {width: 7.646700, height: 5.726200, depth: 0.100000 }, scene);
-	ANote0.position = new BABYLON.Vector3(4,2,40)
+	ANote0.position = new BABYLON.Vector3(4,2,40);
 	var mat = new BABYLON.StandardMaterial("ANote0Mat",scene);
 	mat.diffuseColor = new BABYLON.Color4(0, 0, 0, 1);
 	ANote0.material = mat;
